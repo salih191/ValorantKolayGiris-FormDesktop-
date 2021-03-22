@@ -37,7 +37,7 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
                 {
                     cmd.ExecuteNonQuery();
                 }
-                catch (Exception e)
+                catch (Exception )
                 {
 
                 }

@@ -8,112 +8,103 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-
-namespace ValorantKolayGiris_FormDesktop_.Properties
-{
+namespace ValorantKolayGiris_FormDesktop_.Properties {
+    
+    
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
-    {
-
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-
-        public static Settings Default
-        {
-            get
-            {
+        
+        public static Settings Default {
+            get {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ilkGiris {
+            get {
+                return ((bool)(this["ilkGiris"]));
+            }
+            set {
+                this["ilkGiris"] = value;
+            }
+        }
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool FormOtoAcilsin
-        {
-            get
-            {
+        public bool FormOtoAcilsin {
+            get {
                 return ((bool)(this["FormOtoAcilsin"]));
             }
-            set
-            {
+            set {
                 this["FormOtoAcilsin"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
-        public global::System.Drawing.Point FormLocation
-        {
-            get
-            {
+        public global::System.Drawing.Point FormLocation {
+            get {
                 return ((global::System.Drawing.Point)(this["FormLocation"]));
             }
-            set
-            {
+            set {
                 this["FormLocation"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("505, 349")]
-        public global::System.Drawing.Size FormSize
-        {
-            get
-            {
+        public global::System.Drawing.Size FormSize {
+            get {
                 return ((global::System.Drawing.Size)(this["FormSize"]));
             }
-            set
-            {
+            set {
                 this["FormSize"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool OyunAcilincaUygulamayiKapat
-        {
-            get
-            {
+        public bool OyunAcilincaUygulamayiKapat {
+            get {
                 return ((bool)(this["OyunAcilincaUygulamayiKapat"]));
             }
-            set
-            {
+            set {
                 this["OyunAcilincaUygulamayiKapat"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Riot Games\\valorant.lnk")]
-        public string UygulamaYolu
-        {
-            get
-            {
+        public string UygulamaYolu {
+            get {
                 return ((string)(this["UygulamaYolu"]));
             }
-            set
-            {
+            set {
                 this["UygulamaYolu"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool CaplockKapat
-        {
-            get
-            {
+        public bool CaplockKapat {
+            get {
                 return ((bool)(this["CaplockKapat"]));
             }
-            set
-            {
+            set {
                 this["CaplockKapat"] = value;
             }
         }
     }
 }
-

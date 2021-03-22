@@ -37,6 +37,13 @@ namespace ValorantKolayGiris_FormDesktop_.forms
         private bool veriYuklendi = false;
         public void listele()
         {
+            if (Settings.Default.ilkGiris)
+            {
+                if (MessageBox.Show("otomatik giriş için kullanıcı adı kısmında mousenin tekerlek tuşuna basınız\nTekrar gösterilsin mi uyarı?","",MessageBoxButtons.YesNoCancel) == DialogResult.No)
+                {
+                    Settings.Default.ilkGiris = false;
+                }
+            }
             if (!File.Exists(Settings.Default.UygulamaYolu))
             {
                 MessageBox.Show("dosya bulunamadı");

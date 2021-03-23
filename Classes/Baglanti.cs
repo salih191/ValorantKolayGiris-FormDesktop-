@@ -32,7 +32,7 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
                     "CREATE TABLE \"sifreTut\" (\r\n\t\"Sifre\"\tTEXT,\r\n\t\"KullaniciAdi\"\tTEXT,\r\n\t\"id\"\tINTEGER,\r\n\t\"Not\"\tTEXT,\r\n\tUNIQUE(\"Sifre\",\"KullaniciAdi\"),\r\n\tPRIMARY KEY(\"id\")\r\n);" +
                     @"insert into uygulamaVerisi VALUES('C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Riot Games\valorant.lnk',0)";
                 cmd.CommandText = sorgu;
-                baglanti.Open();
+                cmd.Connection = Baglan();
                 try
                 {
                     cmd.ExecuteNonQuery();

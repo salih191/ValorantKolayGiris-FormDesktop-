@@ -8,7 +8,7 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
 {
     class Sifreleme
     {
-        public string sifrele(string sifre)//şifre başkası tarafından veri tabanından çekilirse yanlış bilgi vermek için şifrele
+        public static string sifrele(string sifre)//şifre başkası tarafından veri tabanından çekilirse yanlış bilgi vermek için şifrele
         {
             string sifreliSifre = null;//şifreli halini tutacak string
             int[] asciiSifre = new int[sifre.Length];//ascii tablosu halini tutacak dizi
@@ -28,7 +28,7 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
             return sifreliSifre;//sonucu döndür
         }
 
-        public string sifreCoz(string sifreliSifre)//şifreyi göstereceği zaman şifreli metni çöz
+        public static string sifreCoz(string sifreliSifre)//şifreyi göstereceği zaman şifreli metni çöz
         {
             string sifre = "";//şifremizi tutacak string
 

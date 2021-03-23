@@ -8,23 +8,13 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
 {
     public class WindowsState
     {
-        public static bool Durum(string uygulama)
+        public static bool Durum(string uygulama,out Point konum)
         {
             Process[] processes = Process.GetProcesses();
-            if (EkrandaMi(uygulama, processes)) return true;
-
-            //if (EkranaGetir(uygulama, processes))
-            //{
-            //    for (int i = 0; i < 5; i++)
-            //    {
-            //        SendKeys.Send("{TAB}");
-            //    }
-
-            //    return true;
-            //}
+            if (EkrandaMi(uygulama, processes,out konum)) return true;
             return EkranaGetir(uygulama, processes);
         }
-        private static bool EkrandaMi(string uygulama, Process[] processes)
+        private static bool EkrandaMi(string uygulama, Process[] processes,out Point konum)
         {
             foreach (Process p in processes)
             {
@@ -39,12 +29,13 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
                     {
                         int x= wp.rcNormalPosition.left+65;
                         int y = wp.rcNormalPosition.top+185;
-                        Cursor.Position = new Point(x, y);
+                        konum = new Point(x, y);
                         return true;
                     }
                 }
             }
 
+            konum = new Point();
             return false;
         }
 
@@ -62,8 +53,7 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
                     SetWindowPlacement(app_hwnd, ref wp);
                 }
             }
-
-            if (EkrandaMi(uygulama,processes))
+            if (EkrandaMi(uygulama,processes,out Point konum))
             {
                 return true;
             }
@@ -74,9 +64,6 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool GetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
-
-        [DllImport("user32.dll", SetLastError = true)]
-        static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
         [DllImport("user32.dll")]
         static extern bool SetWindowPlacement(IntPtr hWnd,

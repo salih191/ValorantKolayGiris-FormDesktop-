@@ -1,122 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data.SQLite;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ValorantKolayGiris_FormDesktop_.Entity;
 using ValorantKolayGiris_FormDesktop_.forms;
 using ValorantKolayGiris_FormDesktop_.Properties;
 using Timer = System.Windows.Forms.Timer;
 
-
 namespace ValorantKolayGiris_FormDesktop_.Classes
 {
-
-    class Listele
+    public class Listele2
     {
         #region değişkenler
-
         private DB db = new DB();
-        Sifreleme sifrecoz = new Sifreleme();
-        BackgroundWorker backgroundWorker = new BackgroundWorker();
-        public Panel panel1;
+        public Panel panel;
         private string uygulamaYolu;
-        private Form _form;
+        public FormWindowState FormWindowState { get; set; }
+        private bool gir = true;
+        private sifreTut girilicekHesap;
+        private List<Timer> islemBitinceSilinecekler = new List<Timer>();
         #endregion
 
-        public Listele(Panel panel, string uygulamaYolu, Form form)
-        {
-            panel1 = panel;
-            backgroundWorker.DoWork += new DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            this.uygulamaYolu = uygulamaYolu;
-            _form = form;
-        }
-        [DllImport("user32.dll")]
-        static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, UIntPtr dwExtraInfo);
-        const int KEYEVENTF_EXTENDEDKEY = 0x1;
-        const int KEYEVENTF_KEYUP = 0x2;
-
-        private void timer_Tick(object sender, EventArgs e)
-        {
-
-            if (FrmAnasayfa.MouseButtons == MouseButtons.Middle || !Settings.Default.MakroKUllan)
-            {
-                Timer timer = sender as Timer;
-                TimerEleman timerEleman = (TimerEleman)timer.Tag;
-                timer.Stop();
-                string nick = Regex.Replace(timerEleman.Nick, "[+%~()]", "{$0}");
-                string sifre = Regex.Replace(timerEleman.Sifre, "[+%~()]", "{$0}");
-                foreach (var VARIABLE in timerEleman.Sifre)
-                {
-                    if (VARIABLE == '^')
-                    {
-                        Clipboard.SetText("^");
-                        sifre = Regex.Replace(sifre, "[ ^ ]", "^(v)");
-                        break;
-                    }
-                }
-
-                if (Properties.Settings.Default.CaplockKapat)
-                {
-                    if (Control.IsKeyLocked(Keys.CapsLock))
-                        keybd_event(0x14, 0x45, KEYEVENTF_EXTENDEDKEY, (UIntPtr)0);
-                }
-                else
-                {
-                    if (Control.IsKeyLocked(Keys.CapsLock))
-                    {
-                        harfDegisimi(ref nick);
-                        harfDegisimi(ref sifre);
-                    }
-                }
-
-                while (!WindowsState.Durum("RiotClientUx"))
-                {
-
-                }
-                if (WindowsState.Durum("RiotClientUx"))
-                {
-                    mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
-                    Thread.Sleep(500);
-                    SendKeys.SendWait("" + nick + "{tab}" + sifre + "{ENTER}");
-                    mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-                    if (Properties.Settings.Default.OyunAcilincaUygulamayiKapat)
-                    {
-                        Application.Exit();
-                    }
-                }
-            }
-        }
-        [DllImport("user32.dll")]
-        private static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint dwData, int dwExtraInfo);
+        #region sabitler
         private const int MOUSEEVENTF_LEFTDOWN = 0x0002;
         const uint MOUSEEVENTF_LEFTUP = 0x0004;
-        private void harfDegisimi(ref string metin)
+        const int KEYEVENTF_EXTENDEDKEY = 0x1;
+        const int KEYEVENTF_KEYUP = 0x2;
+        #endregion
+
+        #region Dll
+        [DllImport("user32.dll")]
+        static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, UIntPtr dwExtraInfo);
+        [DllImport("user32.dll")]
+        private static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint dwData, int dwExtraInfo);
+        #endregion
+
+
+        public Listele2(Panel panel, string uygulamaYolu)
         {
-            foreach (var harf in metin)
-            {
-                if (harf == char.ToUpper(harf))
-                {
-                    metin = metin.Replace(harf, char.ToLower(harf));
-                }
-                else
-                {
-                    metin = metin.Replace(harf, char.ToUpper(harf));
-                }
-            }
-        }
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            Process.Start(uygulamaYolu);
+            this.panel = panel;
+            this.uygulamaYolu = uygulamaYolu;
         }
         public void sifreCek()
         {
@@ -125,7 +52,7 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
             List<sifreTut> sifreler = db.set<sifreTut>();
             foreach (var sifreTut in sifreler)
             {
-                sifreTut.Sifre = sifrecoz.sifreCoz(sifreTut.Sifre);
+                sifreTut.Sifre = Sifreleme.sifreCoz(sifreTut.Sifre);
                 sifreEkle(top, left, sifreTut);
                 top += 20;
             }
@@ -140,13 +67,13 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
             Button button = new Button();
             Button btnsil = new Button();
             Button btnDuzenle = new Button();
-            panel1.Controls.Add(nick);
-            panel1.Controls.Add(sifre);
-            panel1.Controls.Add(not);
-            panel1.Controls.Add(check);
-            panel1.Controls.Add(button);
-            panel1.Controls.Add(btnsil);
-            panel1.Controls.Add(btnDuzenle);
+            panel.Controls.Add(nick);
+            panel.Controls.Add(sifre);
+            panel.Controls.Add(not);
+            panel.Controls.Add(check);
+            panel.Controls.Add(button);
+            panel.Controls.Add(btnsil);
+            panel.Controls.Add(btnDuzenle);
             //
             //nick
             //
@@ -192,12 +119,6 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
             not.ReadOnly = true;
             not.Text = sifreTut.Not;
             //
-            //TimerEleman
-            //
-            TimerEleman timerEleman = new TimerEleman();
-            timerEleman.Nick = nick.Text;
-            timerEleman.Sifre = sifre.Text;
-            //
             //button
             //
             button.Top = top;
@@ -205,7 +126,7 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
             button.Click += new EventHandler(this.button_Click);
             button.Text = "aç";
             button.Size = new Size(30, 20);
-            button.Tag = timerEleman;
+            button.Tag = sifreTut;
             //
             //btnsil
             //
@@ -225,22 +146,19 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
             btnDuzenle.Size = new Size(30, 20);
             btnDuzenle.Tag = sifreTut;
         }
-
         private void btnDuzenle_Click(object sender, EventArgs e)
         {
             sifreTut btnDEleman = (sifreTut)((sender as Button).Tag);
             FrmSifreGuncelle frmSifreGuncelle = new FrmSifreGuncelle(btnDEleman);
             frmSifreGuncelle.ShowDialog();
-            panel1.Controls.Clear();
+            panel.Controls.Clear();
             FrmAnasayfa frmAnasayfa = (FrmAnasayfa)Application.OpenForms["FrmAnasayfa"];
             frmAnasayfa.listele();
         }
-
         private void btnSil_Click(object sender, EventArgs e)
         {
             Baglanti baglanti = new Baglanti();
             int id = Convert.ToInt32((sender as Button).Tag);
-            SQLiteCommand cmd2 = new SQLiteCommand();
             try
             {
                 if (MessageBox.Show("emin misin", "silme", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -252,20 +170,25 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
             {
                 MessageBox.Show(exception.Message);
             }
-            panel1.Controls.Clear();
+            panel.Controls.Clear();
             FrmAnasayfa frmAnasayfa = (FrmAnasayfa)Application.OpenForms["FrmAnasayfa"];
             frmAnasayfa.listele();
         }
         private void button_Click(object sender, EventArgs e)
         {
-            backgroundWorker.RunWorkerAsync();
+            FormWindowState = FormWindowState.Minimized;
+            girilicekHesap = (sifreTut)(sender as Button).Tag;
             Timer timer = new Timer();
-            timer.Tag = (sender as Button).Tag;
-            timer.Tick += new System.EventHandler(this.timer_Tick);
+            if (!Settings.Default.MakroKUllan)
+            {
+                timer.Interval = 1000;
+            }
+            
+            timer.Tick += new EventHandler(this.SifreGir);
             timer.Start();
-            _form.WindowState = FormWindowState.Minimized;
+            islemBitinceSilinecekler.Add(timer);
+            Process.Start(uygulamaYolu);
         }
-
         private void textBox_Click(object sender, EventArgs e)
         {
             TextBox textBox = (sender as TextBox);
@@ -274,10 +197,7 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
             {
                 Clipboard.SetText(textBox.Text);
             }
-
         }
-
-        private bool gir = true;
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox checkBox = (sender as CheckBox);
@@ -297,6 +217,96 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
             {
                 sifreBox.PasswordChar = '*';
             }
+        }
+
+        private void mouseTut(object sender, EventArgs e)
+        {
+            WindowsState.Durum("RiotClientUx", out Point konum);
+            Cursor.Position = konum;
+            mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+        }
+        private void SifreGir(object sender, EventArgs e)
+        {
+
+            if (FrmAnasayfa.MouseButtons == MouseButtons.Middle || !Settings.Default.MakroKUllan)
+            {
+                Timer timer = sender as Timer;
+                timer.Stop();
+                KarakterKontrol(out var nick, out var sifre);
+                while (!WindowsState.Durum("RiotClientUx", out _))
+                {
+
+                }
+                if (WindowsState.Durum("RiotClientUx", out _))
+                {
+                    Timer timer2 = new Timer();
+                    islemBitinceSilinecekler.Add(timer2);
+                    timer2.Tick += new EventHandler(this.mouseTut);
+                    mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+                    timer2.Start();
+                    if (!Settings.Default.MakroKUllan)
+                    {
+                        Thread.Sleep(700);
+                    }
+
+                    SendKeys.SendWait("" + nick + "{tab}" + sifre + "{ENTER}");
+                    timer2.Stop();
+                    mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+                    if (Properties.Settings.Default.OyunAcilincaUygulamayiKapat)
+                    {
+                        Application.Exit();
+                    }
+                }
+
+                foreach (var sil in islemBitinceSilinecekler)
+                {
+                    sil.Dispose();
+                }
+            }
+        }
+
+        private void KarakterKontrol(out string nick, out string sifre)
+        {
+            nick = Regex.Replace(girilicekHesap.KullaniciAdi, "[+%~()]", "{$0}");
+            sifre = Regex.Replace(girilicekHesap.Sifre, "[+%~()]", "{$0}");
+            foreach (var VARIABLE in girilicekHesap.Sifre)
+            {
+                if (VARIABLE == '^')
+                {
+                    Clipboard.SetText("^");
+                    sifre = Regex.Replace(sifre, "[ ^ ]", "^(v)");
+                    break;
+                }
+            }
+
+            if (Properties.Settings.Default.CaplockKapat)
+            {
+                if (Control.IsKeyLocked(Keys.CapsLock))
+                    keybd_event(0x14, 0x45, KEYEVENTF_EXTENDEDKEY, (UIntPtr)0);
+            }
+            else
+            {
+                if (Control.IsKeyLocked(Keys.CapsLock))
+                {
+                    nick = harfDegisimi(nick);
+                    sifre = harfDegisimi(sifre);
+                }
+            }
+        }
+        private string harfDegisimi(string metin)
+        {
+            foreach (var harf in metin)
+            {
+                if (harf == char.ToUpper(harf))
+                {
+                    metin = metin.Replace(harf, char.ToLower(harf));
+                }
+                else
+                {
+                    metin = metin.Replace(harf, char.ToUpper(harf));
+                }
+            }
+            return metin;
         }
     }
 }

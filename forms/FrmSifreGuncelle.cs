@@ -30,12 +30,11 @@ namespace ValorantKolayGiris_FormDesktop_.forms
         private void btnGuncelle_Click(object sender, EventArgs e)
         {
             DB db = new DB();
-            Sifreleme sifrele = new Sifreleme();
             try
             {
                 _sifreTut.KullaniciAdi = txtNick.Text;
                 _sifreTut.Not = txtNot.Text;
-                _sifreTut.Sifre = sifrele.sifrele(txtSifre.Text);
+                _sifreTut.Sifre = Sifreleme.sifrele(txtSifre.Text);
                 db.Update(_sifreTut);
                 this.Close();
             }

@@ -26,7 +26,10 @@ namespace ValorantKolayGiris_FormDesktop_.forms
         {
             if (UygulamaKontrol())
             {
-                Listele liste = new Listele(panel1, Settings.Default.UygulamaYolu, this);
+                //Listele liste = new Listele(panel1, Settings.Default.UygulamaYolu, this);
+                //liste.sifreCek();
+                Listele2 liste = new Listele2(panel1, Settings.Default.UygulamaYolu);
+                liste.FormWindowState = this.WindowState;
                 liste.sifreCek();
             }
             else
@@ -49,7 +52,11 @@ namespace ValorantKolayGiris_FormDesktop_.forms
                     Settings.Default.UygulamaYolu = openFile.FileName;
                     UygulamaKontrol();
                 }
-                return false;
+                else
+                {
+                    return false;
+                }
+                
             }
             return true;
         }

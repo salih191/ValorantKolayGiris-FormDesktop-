@@ -25,10 +25,10 @@ namespace ValorantKolayGiris_FormDesktop_.forms
         private void buttonEkle_Click(object sender, EventArgs e)
         {
             DB db = new DB();
-            Sifreleme sifrele=new Sifreleme();
+            
             try
             {
-                string sifre= sifrele.sifrele(textBoxSifre.Text);
+                string sifre= Sifreleme.sifrele(textBoxSifre.Text);
                 sifreTut sifreTut = new sifreTut {Sifre = sifre,KullaniciAdi = textBoxNick.Text,Not = txtNot.Text};
                 db.Add(sifreTut);
             }

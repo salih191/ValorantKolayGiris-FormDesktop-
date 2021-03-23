@@ -85,9 +85,8 @@
   <ItemGroup>
     <Compile Include="Classes\Baglanti.cs" />
     <Compile Include="Classes\DB.cs" />
-    <Compile Include="Classes\Listele.cs" />
+    <Compile Include="Classes\Listele2.cs" />
     <Compile Include="Classes\Sifreleme.cs" />
-    <Compile Include="Classes\TimerEleman.cs" />
     <Compile Include="Classes\WindowsState.cs" />
     <Compile Include="Entity\IEntity.cs" />
     <Compile Include="Entity\sifreTut.cs" />
@@ -139,7 +138,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="ValorantKolayGiris%28FormDesktop%29_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

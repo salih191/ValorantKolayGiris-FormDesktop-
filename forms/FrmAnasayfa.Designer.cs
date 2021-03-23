@@ -36,8 +36,8 @@ namespace ValorantKolayGiris_FormDesktop_.forms
             this.bilgisayarİleBirlikteAçılsınToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oyunAçılıncaUygulamayıKapatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.capslockKapatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.makroKullanTavsiyeEdilenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -95,6 +95,13 @@ namespace ValorantKolayGiris_FormDesktop_.forms
             this.capslockKapatToolStripMenuItem.Text = "Capslock kapat";
             this.capslockKapatToolStripMenuItem.Click += new System.EventHandler(this.capslockKapatToolStripMenuItem_Click);
             // 
+            // makroKullanTavsiyeEdilenToolStripMenuItem
+            // 
+            this.makroKullanTavsiyeEdilenToolStripMenuItem.Name = "makroKullanTavsiyeEdilenToolStripMenuItem";
+            this.makroKullanTavsiyeEdilenToolStripMenuItem.Size = new System.Drawing.Size(451, 26);
+            this.makroKullanTavsiyeEdilenToolStripMenuItem.Text = "Makro(mouse tekerlek tıklanma) Kullan(Tavsiye Edilen)";
+            this.makroKullanTavsiyeEdilenToolStripMenuItem.Click += new System.EventHandler(this.makroKullanTavsiyeEdilenToolStripMenuItem_Click);
+            // 
             // panel1
             // 
             this.panel1.AutoScroll = true;
@@ -103,13 +110,6 @@ namespace ValorantKolayGiris_FormDesktop_.forms
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(505, 349);
             this.panel1.TabIndex = 2;
-            // 
-            // makroKullanTavsiyeEdilenToolStripMenuItem
-            // 
-            this.makroKullanTavsiyeEdilenToolStripMenuItem.Name = "makroKullanTavsiyeEdilenToolStripMenuItem";
-            this.makroKullanTavsiyeEdilenToolStripMenuItem.Size = new System.Drawing.Size(451, 26);
-            this.makroKullanTavsiyeEdilenToolStripMenuItem.Text = "Makro(mouse tekerlek tıklanma) Kullan(Tavsiye Edilen)";
-            this.makroKullanTavsiyeEdilenToolStripMenuItem.Click += new System.EventHandler(this.makroKullanTavsiyeEdilenToolStripMenuItem_Click);
             // 
             // FrmAnasayfa
             // 

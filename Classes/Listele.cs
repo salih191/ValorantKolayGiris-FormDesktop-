@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ValorantKolayGiris_FormDesktop_.Entity;
 using ValorantKolayGiris_FormDesktop_.forms;
+using ValorantKolayGiris_FormDesktop_.Properties;
 
 
 namespace ValorantKolayGiris_FormDesktop_.Classes
@@ -30,7 +31,6 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
         private Form _form;
         #endregion
 
-
         public Listele(Panel panel, string uygulamaYolu, Form form)
         {
             panel1 = panel;
@@ -45,7 +45,7 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (FrmAnasayfa.MouseButtons == MouseButtons.Middle)
+            if (true)
             {
                 Timer timer = sender as Timer;
                 TimerEleman timerEleman = (TimerEleman)timer.Tag;
@@ -76,10 +76,17 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
                     }
                 }
 
-                SendKeys.SendWait("" + nick + "{tab}" + sifre + "{ENTER}");
-                if (Properties.Settings.Default.OyunAcilincaUygulamayiKapat)
+                while (!WindowsState.Durum("RiotClientUx"))
                 {
-                    Application.Exit();
+
+                }
+                if (WindowsState.Durum("RiotClientUx"))
+                {
+                    SendKeys.SendWait("" + nick + "{tab}" + sifre + "{ENTER}");
+                    if (Properties.Settings.Default.OyunAcilincaUygulamayiKapat)
+                    {
+                        Application.Exit();
+                    }
                 }
             }
         }
@@ -88,7 +95,7 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
         {
             foreach (var harf in metin)
             {
-                if (harf==char.ToUpper(harf))
+                if (harf == char.ToUpper(harf))
                 {
                     metin = metin.Replace(harf, char.ToLower(harf));
                 }
@@ -207,7 +214,7 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
             btnDuzenle.Click += new EventHandler(this.btnDuzenle_Click);
             btnDuzenle.Text = "düzenle";
             btnDuzenle.Size = new Size(30, 20);
-            btnDuzenle.Tag =sifreTut;
+            btnDuzenle.Tag = sifreTut;
         }
 
         private void btnDuzenle_Click(object sender, EventArgs e)
@@ -229,7 +236,7 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
             {
                 if (MessageBox.Show("emin misin", "silme", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    db.Delete(new sifreTut{id=id});
+                    db.Delete(new sifreTut { id = id });
                 }
             }
             catch (Exception exception)

@@ -1,18 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SQLite;
-using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Net.Configuration;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using ValorantKolayGiris_FormDesktop_.Classes;
@@ -37,32 +24,39 @@ namespace ValorantKolayGiris_FormDesktop_.forms
         private bool veriYuklendi = false;
         public void listele()
         {
-            if (Settings.Default.ilkGiris)
+            if (UygulamaKontrol())
             {
-                if (MessageBox.Show("otomatik giriş için kullanıcı adı kısmında mousenin tekerlek tuşuna basınız\nTekrar gösterilsin mi uyarı?","",MessageBoxButtons.YesNoCancel) == DialogResult.No)
-                {
-                    Settings.Default.ilkGiris = false;
-                }
+                Listele liste = new Listele(panel1, Settings.Default.UygulamaYolu, this);
+                liste.sifreCek();
             }
+            else
+            {
+                MessageBox.Show("Valorant Bulunamadı !!!!");
+                Application.Exit();
+            }
+        }
+
+        private bool UygulamaKontrol()
+        {
             if (!File.Exists(Settings.Default.UygulamaYolu))
             {
-                MessageBox.Show("dosya bulunamadı");
+                MessageBox.Show("valorant kısayolu bulunamadı");
                 OpenFileDialog openFile = new OpenFileDialog();
-                openFile.Filter = "kısayol dosyası |*.lnk";
+                openFile.Filter = "valorant kısayol dosyası |*.lnk";
                 openFile.InitialDirectory = @"C:\ProgramData\Microsoft\Windows\Start Menu\Programs";
                 if (openFile.ShowDialog() == DialogResult.OK)
                 {
                     Settings.Default.UygulamaYolu = openFile.FileName;
+                    UygulamaKontrol();
                 }
+                return false;
             }
-
-            Listele liste = new Listele(panel1, Settings.Default.UygulamaYolu,this);
-            liste.sifreCek();
+            return true;
         }
-        
+
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            FrmSifreEkle frmSifreEkle=new FrmSifreEkle(panel1);
+            FrmSifreEkle frmSifreEkle = new FrmSifreEkle(panel1);
             frmSifreEkle.ShowDialog();
         }
 
@@ -121,8 +115,8 @@ namespace ValorantKolayGiris_FormDesktop_.forms
 
         private void FrmAnasayfa_LocationChanged(object sender, EventArgs e)
         {
-            if (veriYuklendi && (this.Location.X>=0&&this.Location.Y>=0))
-            { 
+            if (veriYuklendi && (this.Location.X >= 0 && this.Location.Y >= 0))
+            {
                 Settings.Default.FormLocation = this.Location;
             }
         }
@@ -135,5 +129,20 @@ namespace ValorantKolayGiris_FormDesktop_.forms
             }
         }
 
+        private bool ilkYuklenme;
+        private void FrmAnasayfa_Activated(object sender, EventArgs e)
+        {
+            if (!ilkYuklenme)
+            {
+                ilkYuklenme = true;
+                if (Settings.Default.ilkGiris)
+                {
+                    if (MessageBox.Show("Sol üstten açılır menüden şifre ekleyebilirsiniz daha sonra aç butonuna basmanız yeterlidir\nTekrar gösterilsin mi uyarı?", "", MessageBoxButtons.YesNoCancel) == DialogResult.No)
+                    {
+                        Settings.Default.ilkGiris = false;
+                    }
+                }
+            }
+        }
     }
 }

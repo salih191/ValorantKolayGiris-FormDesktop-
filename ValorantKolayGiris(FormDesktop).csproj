@@ -88,6 +88,7 @@
     <Compile Include="Classes\Listele.cs" />
     <Compile Include="Classes\Sifreleme.cs" />
     <Compile Include="Classes\TimerEleman.cs" />
+    <Compile Include="Classes\WindowsState.cs" />
     <Compile Include="Entity\IEntity.cs" />
     <Compile Include="Entity\sifreTut.cs" />
     <Compile Include="forms\FrmAnasayfa.cs">

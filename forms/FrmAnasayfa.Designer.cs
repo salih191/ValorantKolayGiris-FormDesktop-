@@ -111,6 +111,7 @@ namespace ValorantKolayGiris_FormDesktop_.forms
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmAnasayfa";
+            this.Activated += new System.EventHandler(this.FrmAnasayfa_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmAnasayfa_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.LocationChanged += new System.EventHandler(this.FrmAnasayfa_LocationChanged);

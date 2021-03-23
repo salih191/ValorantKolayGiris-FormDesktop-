@@ -118,5 +118,17 @@ namespace ValorantKolayGiris_FormDesktop_.Properties {
                 this["MakroKUllan"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ilkGiris2 {
+            get {
+                return ((bool)(this["ilkGiris2"]));
+            }
+            set {
+                this["ilkGiris2"] = value;
+            }
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
         private DB db = new DB();
         public Panel panel;
         private string uygulamaYolu;
-        public FormWindowState FormWindowState { get; set; }
+        public Form _form;
         private bool gir = true;
         private sifreTut girilicekHesap;
         private List<Timer> islemBitinceSilinecekler = new List<Timer>();
@@ -40,10 +40,11 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
         #endregion
 
 
-        public Listele2(Panel panel, string uygulamaYolu)
+        public Listele2(Panel panel, string uygulamaYolu,Form form)
         {
             this.panel = panel;
             this.uygulamaYolu = uygulamaYolu;
+            _form = form;
         }
         public void sifreCek()
         {
@@ -176,14 +177,23 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
         }
         private void button_Click(object sender, EventArgs e)
         {
-            FormWindowState = FormWindowState.Minimized;
             girilicekHesap = (sifreTut)(sender as Button).Tag;
             Timer timer = new Timer();
             if (!Settings.Default.MakroKUllan)
             {
                 timer.Interval = 1000;
             }
-            
+            else
+            {
+                if (Settings.Default.ilkGiris2)
+                {
+                    if (MessageBox.Show("Mousenin tekerlek tuşuna basarak giriş yapın\nTekrar gösterilsin mi uyarı?", "", MessageBoxButtons.YesNoCancel) == DialogResult.No)
+                    {
+                        Settings.Default.ilkGiris2 = false;
+                    }
+                }
+            }
+            _form.WindowState = FormWindowState.Minimized;
             timer.Tick += new EventHandler(this.SifreGir);
             timer.Start();
             islemBitinceSilinecekler.Add(timer);

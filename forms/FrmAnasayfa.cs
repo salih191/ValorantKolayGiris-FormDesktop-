@@ -28,8 +28,7 @@ namespace ValorantKolayGiris_FormDesktop_.forms
             {
                 //Listele liste = new Listele(panel1, Settings.Default.UygulamaYolu, this);
                 //liste.sifreCek();
-                Listele2 liste = new Listele2(panel1, Settings.Default.UygulamaYolu);
-                liste.FormWindowState = this.WindowState;
+                Listele2 liste = new Listele2(panel1, Settings.Default.UygulamaYolu,this);
                 liste.sifreCek();
             }
             else

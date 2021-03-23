@@ -9,11 +9,13 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ValorantKolayGiris_FormDesktop_.Entity;
 using ValorantKolayGiris_FormDesktop_.forms;
 using ValorantKolayGiris_FormDesktop_.Properties;
+using Timer = System.Windows.Forms.Timer;
 
 
 namespace ValorantKolayGiris_FormDesktop_.Classes
@@ -82,7 +84,10 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
                 }
                 if (WindowsState.Durum("RiotClientUx"))
                 {
+                    mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+                    Thread.Sleep(500);
                     SendKeys.SendWait("" + nick + "{tab}" + sifre + "{ENTER}");
+                    mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
                     if (Properties.Settings.Default.OyunAcilincaUygulamayiKapat)
                     {
                         Application.Exit();
@@ -90,7 +95,10 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
                 }
             }
         }
-
+        [DllImport("user32.dll")]
+        private static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint dwData, int dwExtraInfo);
+        private const int MOUSEEVENTF_LEFTDOWN = 0x0002;
+        const uint MOUSEEVENTF_LEFTUP = 0x0004;
         private void harfDegisimi(ref string metin)
         {
             foreach (var harf in metin)

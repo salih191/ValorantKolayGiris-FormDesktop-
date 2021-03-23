@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -12,18 +13,17 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
             Process[] processes = Process.GetProcesses();
             if (EkrandaMi(uygulama, processes)) return true;
 
-            if (EkranaGetir(uygulama, processes))
-            {
-                for (int i = 0; i < 5; i++)
-                {
-                    SendKeys.Send("{TAB}");
-                }
+            //if (EkranaGetir(uygulama, processes))
+            //{
+            //    for (int i = 0; i < 5; i++)
+            //    {
+            //        SendKeys.Send("{TAB}");
+            //    }
 
-                return true;
-            }
-            return false;
+            //    return true;
+            //}
+            return EkranaGetir(uygulama, processes);
         }
-
         private static bool EkrandaMi(string uygulama, Process[] processes)
         {
             foreach (Process p in processes)
@@ -37,6 +37,9 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
 
                     if (wp.showCmd == 1)
                     {
+                        int x= wp.rcNormalPosition.left+65;
+                        int y = wp.rcNormalPosition.top+185;
+                        Cursor.Position = new Point(x, y);
                         return true;
                     }
                 }

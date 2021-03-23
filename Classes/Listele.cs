@@ -47,7 +47,8 @@ namespace ValorantKolayGiris_FormDesktop_.Classes
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (true)
+
+            if (FrmAnasayfa.MouseButtons == MouseButtons.Middle || !Settings.Default.MakroKUllan)
             {
                 Timer timer = sender as Timer;
                 TimerEleman timerEleman = (TimerEleman)timer.Tag;

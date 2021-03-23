@@ -37,6 +37,7 @@ namespace ValorantKolayGiris_FormDesktop_.forms
             this.oyunAçılıncaUygulamayıKapatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.capslockKapatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.makroKullanTavsiyeEdilenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,7 +59,8 @@ namespace ValorantKolayGiris_FormDesktop_.forms
             this.toolStripMenuItem1,
             this.bilgisayarİleBirlikteAçılsınToolStripMenuItem,
             this.oyunAçılıncaUygulamayıKapatToolStripMenuItem,
-            this.capslockKapatToolStripMenuItem});
+            this.capslockKapatToolStripMenuItem,
+            this.makroKullanTavsiyeEdilenToolStripMenuItem});
             this.toolStripDropDownButtonSecenekler.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButtonSecenekler.Image")));
             this.toolStripDropDownButtonSecenekler.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButtonSecenekler.Name = "toolStripDropDownButtonSecenekler";
@@ -68,28 +70,28 @@ namespace ValorantKolayGiris_FormDesktop_.forms
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(301, 26);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(451, 26);
             this.toolStripMenuItem1.Text = "şifre ekle";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // bilgisayarİleBirlikteAçılsınToolStripMenuItem
             // 
             this.bilgisayarİleBirlikteAçılsınToolStripMenuItem.Name = "bilgisayarİleBirlikteAçılsınToolStripMenuItem";
-            this.bilgisayarİleBirlikteAçılsınToolStripMenuItem.Size = new System.Drawing.Size(301, 26);
+            this.bilgisayarİleBirlikteAçılsınToolStripMenuItem.Size = new System.Drawing.Size(451, 26);
             this.bilgisayarİleBirlikteAçılsınToolStripMenuItem.Text = "Bilgisayar ile birlikte açılsın";
             this.bilgisayarİleBirlikteAçılsınToolStripMenuItem.Click += new System.EventHandler(this.bilgisayarİleBirlikteAçılsınToolStripMenuItem_Click);
             // 
             // oyunAçılıncaUygulamayıKapatToolStripMenuItem
             // 
             this.oyunAçılıncaUygulamayıKapatToolStripMenuItem.Name = "oyunAçılıncaUygulamayıKapatToolStripMenuItem";
-            this.oyunAçılıncaUygulamayıKapatToolStripMenuItem.Size = new System.Drawing.Size(301, 26);
+            this.oyunAçılıncaUygulamayıKapatToolStripMenuItem.Size = new System.Drawing.Size(451, 26);
             this.oyunAçılıncaUygulamayıKapatToolStripMenuItem.Text = "Oyun açılınca uygulamayı kapat";
             this.oyunAçılıncaUygulamayıKapatToolStripMenuItem.Click += new System.EventHandler(this.oyunAçılıncaUygulamayıKapatToolStripMenuItem_Click);
             // 
             // capslockKapatToolStripMenuItem
             // 
             this.capslockKapatToolStripMenuItem.Name = "capslockKapatToolStripMenuItem";
-            this.capslockKapatToolStripMenuItem.Size = new System.Drawing.Size(301, 26);
+            this.capslockKapatToolStripMenuItem.Size = new System.Drawing.Size(451, 26);
             this.capslockKapatToolStripMenuItem.Text = "Capslock kapat";
             this.capslockKapatToolStripMenuItem.Click += new System.EventHandler(this.capslockKapatToolStripMenuItem_Click);
             // 
@@ -101,6 +103,13 @@ namespace ValorantKolayGiris_FormDesktop_.forms
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(505, 349);
             this.panel1.TabIndex = 2;
+            // 
+            // makroKullanTavsiyeEdilenToolStripMenuItem
+            // 
+            this.makroKullanTavsiyeEdilenToolStripMenuItem.Name = "makroKullanTavsiyeEdilenToolStripMenuItem";
+            this.makroKullanTavsiyeEdilenToolStripMenuItem.Size = new System.Drawing.Size(451, 26);
+            this.makroKullanTavsiyeEdilenToolStripMenuItem.Text = "Makro(mouse tekerlek tıklanma) Kullan(Tavsiye Edilen)";
+            this.makroKullanTavsiyeEdilenToolStripMenuItem.Click += new System.EventHandler(this.makroKullanTavsiyeEdilenToolStripMenuItem_Click);
             // 
             // FrmAnasayfa
             // 
@@ -131,6 +140,7 @@ namespace ValorantKolayGiris_FormDesktop_.forms
         private System.Windows.Forms.ToolStripMenuItem bilgisayarİleBirlikteAçılsınToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem oyunAçılıncaUygulamayıKapatToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem capslockKapatToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem makroKullanTavsiyeEdilenToolStripMenuItem;
     }
 }
 

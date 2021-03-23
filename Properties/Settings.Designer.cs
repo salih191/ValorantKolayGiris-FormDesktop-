@@ -106,5 +106,17 @@ namespace ValorantKolayGiris_FormDesktop_.Properties {
                 this["CaplockKapat"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MakroKUllan {
+            get {
+                return ((bool)(this["MakroKUllan"]));
+            }
+            set {
+                this["MakroKUllan"] = value;
+            }
+        }
     }
 }

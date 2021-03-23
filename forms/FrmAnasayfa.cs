@@ -92,6 +92,7 @@ namespace ValorantKolayGiris_FormDesktop_.forms
             bilgisayarİleBirlikteAçılsınToolStripMenuItem.Checked = Settings.Default.FormOtoAcilsin;
             oyunAçılıncaUygulamayıKapatToolStripMenuItem.Checked = Settings.Default.OyunAcilincaUygulamayiKapat;
             capslockKapatToolStripMenuItem.Checked = Settings.Default.CaplockKapat;
+            makroKullanTavsiyeEdilenToolStripMenuItem.Checked = Settings.Default.MakroKUllan;
             veriYuklendi = true;
         }
 
@@ -143,6 +144,12 @@ namespace ValorantKolayGiris_FormDesktop_.forms
                     }
                 }
             }
+        }
+
+        private void makroKullanTavsiyeEdilenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            makroKullanTavsiyeEdilenToolStripMenuItem.Checked = !makroKullanTavsiyeEdilenToolStripMenuItem.Checked;
+            Settings.Default.MakroKUllan = makroKullanTavsiyeEdilenToolStripMenuItem.Checked;
         }
     }
 }

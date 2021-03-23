@@ -33,6 +33,8 @@ namespace ValorantKolayGiris_FormDesktop_.forms
             Sifreleme sifrele = new Sifreleme();
             try
             {
+                _sifreTut.KullaniciAdi = txtNick.Text;
+                _sifreTut.Not = txtNot.Text;
                 _sifreTut.Sifre = sifrele.sifrele(txtSifre.Text);
                 db.Update(_sifreTut);
                 this.Close();
